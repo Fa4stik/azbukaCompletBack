@@ -4,13 +4,13 @@ const {debugLog} = require("express-fileupload/lib/utilities");
 const transporter = nodemailer.createTransport({
         service: 'Yandex',
         auth: {
-            user: 'prokofiev@azbuka-prom.ru',
-            pass: '3*w(6J8EU'
+            user: process.env.MAIN_MAIL,
+            pass: process.env.MAIN_MAIL_PASS
         }
     },
     {
-        from: 'prokofiev@azbuka-prom.ru',
-        to: 'prokofiev@azbuka-prom.ru'
+        from: process.env.MAIN_MAIL,
+        to: process.env.MAIN_MAIL
     }
 )
 
