@@ -10,10 +10,10 @@ app.use(express.json())
 app.use(fileUpload({}))
 app.use(cors({
     credentials: true,
-    origin: "http://localhost:3000"
+    origin: "*"
 }));
 
-app.use('/', sendMailRouter);
+app.use('/api', sendMailRouter);
 
 async function startApp() {
     try {
