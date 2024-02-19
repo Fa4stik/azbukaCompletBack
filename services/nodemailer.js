@@ -15,16 +15,15 @@ const transporter = nodemailer.createTransport({
 )
 
 const mailer = async (message) => {
-    let isSendMail, errMail;
-    await transporter.sendMail(message, (err, info) => {
-        console.log(err)
-        console.log(info)
-        err && (
-            errMail = err
-        )
-        isSendMail = true;
+    return new Promise(async (resolve, reject) => {
+        await transporter.sendMail(message, (err, info) => {
+            console.log(err)
+            console.log(info)
+            err
+                ? reject(err)
+                : resolve(info)
+        })
     })
-    return isSendMail ? {message: 'Сообщение доставлено'} : {error: errMail}
 }
 
 module.exports = mailer;

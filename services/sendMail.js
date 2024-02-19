@@ -22,9 +22,16 @@ class SendMail {
         )
 
         console.log('result send ')
-        return mailer(message)
-            .then((result) => ({result}))
-            .catch((error) => ({error}));
+
+        let result;
+
+        try {
+            result = await mailer(message);
+        } catch (err) {
+            result = err
+        }
+
+        return {result}
     }
 }
 
