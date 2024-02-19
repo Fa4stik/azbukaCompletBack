@@ -3,7 +3,7 @@ const {debugLog} = require("express-fileupload/lib/utilities");
 
 const transporter = nodemailer.createTransport({
         // service: 'Yandex',
-        host: 'smtp.yandex.ru',
+        host: 'smtp.yandex.com',
         port: 465,
         secure: true,
         auth: {
