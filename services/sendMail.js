@@ -7,20 +7,17 @@ class SendMail {
         let attach;
         if (files) {
             const keysFiles = Object.keys(files);
-            attach = keysFiles.map((key) => {
-                return {
-                    filename: files[key].name,
-                    content: files[key].data
-                }
-            })
+            attach = keysFiles.map((key) => ({
+                filename: files[key].name,
+                content: files[key].data
+            }))
         }
         const message = {
             subject: `${nameFF} / ${projectFF}`,
-            text: `Заказ от ${nameFF}. Телефон ${telFF}`,
-            attachments: [...attach]
+            text: `Заказ от ${nameFF}.\nТелефон ${telFF}.\nКонтакты для связи ${contactFF}`,
+            attachments: attach ? [...attach] : undefined
         }
-        const result = await mailer(message)
-        return result;
+        return mailer(message);
     }
 }
 
