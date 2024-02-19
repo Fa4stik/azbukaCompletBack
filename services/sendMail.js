@@ -3,6 +3,7 @@ const uuid = require('uuid')
 
 class SendMail {
     async sendMail(data, files) {
+        console.log('Start send mail')
         const {contactFF, nameFF, projectFF, telFF} = data
         let attach;
         files && (
@@ -11,14 +12,19 @@ class SendMail {
                 content: files[key].data
             }))
         )
+        console.log('files send mail')
         const message = {
             subject: `${nameFF} / ${projectFF}`,
             text: `Заказ от ${nameFF}.\nТелефон ${telFF}.\nКонтакты для связи ${contactFF}`,
-            attachments: attach ? [...attach] : undefined
         }
+        attach && (
+            message["attachments"] = [...attach]
+        )
+
+        console.log('result send ')
         return mailer(message)
-            .then(() => ({result: 'success'}))
-            .catch(() => ({result: 'error'}));
+            .then((result) => ({result}))
+            .catch((error) => ({error}));
     }
 }
 

@@ -20,10 +20,8 @@ const mailer = async (message) => {
         if (err) {
             isSendMail = false;
             errMail = err;
-            return;
         }
         isSendMail = true;
-        return;
     })
     return isSendMail ? {message: 'Сообщение доставлено'} : {error: errMail}
 }
