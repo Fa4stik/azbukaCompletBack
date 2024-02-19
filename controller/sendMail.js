@@ -7,7 +7,7 @@ class SendMail {
             const answerMail = await sendMailServices.sendMail(req.body, req.files)
             const answerTg = await sendTgServices.sendTg(req.body, req.files)
             return res.json({
-                // answerMail,
+                answerMail,
                 answerTg
             })
         } catch (e) {
