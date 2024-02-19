@@ -2,7 +2,10 @@ const nodemailer = require('nodemailer')
 const {debugLog} = require("express-fileupload/lib/utilities");
 
 const transporter = nodemailer.createTransport({
-        service: 'Yandex',
+        // service: 'Yandex',
+        host: 'smtp.yandex.ru',
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.MAIN_MAIL,
             pass: process.env.MAIN_MAIL_PASS
