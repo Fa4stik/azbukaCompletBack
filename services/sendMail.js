@@ -5,19 +5,20 @@ class SendMail {
     async sendMail(data, files) {
         const {contactFF, nameFF, projectFF, telFF} = data
         let attach;
-        if (files) {
-            const keysFiles = Object.keys(files);
-            attach = keysFiles.map((key) => ({
+        files && (
+            attach = Object.keys(files).map((key) => ({
                 filename: files[key].name,
                 content: files[key].data
             }))
-        }
+        )
         const message = {
             subject: `${nameFF} / ${projectFF}`,
             text: `Заказ от ${nameFF}.\nТелефон ${telFF}.\nКонтакты для связи ${contactFF}`,
             attachments: attach ? [...attach] : undefined
         }
-        return mailer(message);
+        return mailer(message)
+            .then(() => ({result: 'success'}))
+            .catch(() => ({result: 'error'}));
     }
 }
 
