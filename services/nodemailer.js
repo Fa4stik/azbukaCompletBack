@@ -17,10 +17,11 @@ const transporter = nodemailer.createTransport({
 const mailer = async (message) => {
     let isSendMail, errMail;
     await transporter.sendMail(message, (err, info) => {
-        if (err) {
-            isSendMail = false;
-            errMail = err;
-        }
+        console.log(err)
+        console.log(info)
+        err && (
+            errMail = err
+        )
         isSendMail = true;
     })
     return isSendMail ? {message: 'Сообщение доставлено'} : {error: errMail}
